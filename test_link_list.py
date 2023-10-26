@@ -13,6 +13,15 @@ class TestLinkedList(unittest.TestCase):
         else:
             print(Fore.RED + f"Test Failed: {data.head.value}" + Style.RESET_ALL)
 
+    def test_print_list(self):
+        data = LinkedList(10)
+        data.append(5)
+        data.append(16)
+        if data.print_list() == [10, 5, 16]:
+            print(Fore.GREEN + f"Test Passed: {data.print_list()}" + Style.RESET_ALL)
+        else:
+            print(Fore.RED + f"Test Failed: {data.print_list()}" + Style.RESET_ALL)
+
     def test_length(self):
         data = LinkedList(10)
         if data.length == 1:

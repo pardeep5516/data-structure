@@ -1,91 +1,94 @@
 class Node:
     def __init__(self, value):
-        self.value = value
+        self.value: int = value
         self.next = None
 
 
 class LinkedList:
     def __init__(self, value):
         new_node: Node = Node(value)
-        self.head = new_node
-        self.tail = new_node
-        self.length = 1
+        self.head: Node = new_node
+        self.tail: Node = new_node
+        self.length: int = 1
 
-    def print_list(self):
-        temp = self.head
+    def print_list(self) -> list:
+        temp: Node = self.head
+        all_node: list = []
         while temp is not None:
-            print(temp.value)
-            temp = temp.next
+            all_node.append(temp.value)
+            temp: Node = temp.next
+        return all_node
 
-    def link_list_length(self):
+    def link_list_length(self) -> int:
         return self.length
 
-    def append(self, value):
+    def append(self, value) -> bool:
         new_node: Node = Node(value)
         if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-            self.length = 1
+            self.head: Node = new_node
+            self.tail: Node = new_node
+            self.length: int = 1
         else:
-            self.tail.next = new_node
-            self.tail = new_node
+            self.tail.next: Node = new_node
+            self.tail: Node = new_node
         self.length += 1
         return True
 
     def pop(self):
         if self.length == 0:
             return None
-        temp = self.head
-        pre = self.head
+        temp: Node = self.head
+        pre: Node = self.head
         while temp.next is not None:
-            pre = temp
-            temp = temp.next
-        self.tail = pre
-        self.tail.next = None
+            pre: Node = temp
+            temp: Node = temp.next
+        self.tail: Node = pre
+        self.tail.next: Node = None
         self.length -= 1
         if self.length == 0:
-            self.head = None
+            self.head: Node = None
             self.tail = None
         return temp
 
-    def prepend(self, value):
-        new_node = Node(value)
+    def prepend(self, value) -> bool:
+        new_node: Node = Node(value)
         if self.head is None:
-            self.head = new_node
-            self.tail = new_node
-            self.length = 1
+            self.head: Node = new_node
+            self.tail: Node = new_node
+            self.length: int = 1
         else:
-            new_node.next = self.head
-            self.head = new_node
+            new_node.next: Node = self.head
+            self.head: Node = new_node
         self.length += 1
+        return True
 
     def pop_first(self):
         if self.length == 0:
             return None
-        temp = self.head
-        self.head = self.head.next
-        temp.next = None
+        temp: Node = self.head
+        self.head: Node = self.head.next
+        temp.next: Node = None
         self.length -= 1
         if self.length == 0:
-            self.tail = None
+            self.tail: Node = None
         return temp
 
     def get(self, index):
         if index < 0 or index >= self.length:
             return None
-        temp = self.head
+        temp: Node = self.head
         for _ in range(index):
-            temp = temp.next
+            temp: Node = temp.next
         return temp
 
-    def set_value(self, index, value):
-        temp = self.get(index)
+    def set_value(self, index, value) -> bool:
+        temp: Node = self.get(index)
         if temp:
-            temp.value = value
+            temp.value: Node = value
             return True
         return False
 
-    def insert(self, index, value):
+    def insert(self, index, value) -> bool:
         if index < 0 or index > self.length:
             return False
         if index == 0:
@@ -94,10 +97,10 @@ class LinkedList:
         if index == self.length:
             self.append(value)
             return True
-        new_node = Node(value)
-        temp = self.get(index - 1)
-        new_node.next = temp.next
-        temp.next = new_node
+        new_node: Node = Node(value)
+        temp: Node = self.get(index - 1)
+        new_node.next: Node = temp.next
+        temp.next: Node = new_node
         self.length += 1
         return True
 
@@ -108,10 +111,10 @@ class LinkedList:
             return self.pop_first()
         if index == self.length - 1:
             return self.pop()
-        pre = self.get(index - 1)
-        temp = pre.next
-        pre.next = temp.next
-        temp.next = None
+        pre: int = self.get(index - 1)
+        temp: Node = pre.next
+        pre.next: Node = temp.next
+        temp.next: Node = None
         self.length -= 1
         return temp
 
@@ -120,13 +123,14 @@ class LinkedList:
             return None
         if self.length == 1:
             return self.head
-        temp = self.head
-        self.head = self.tail
-        self.tail = temp
-        after = temp.next
+        temp: Node = self.head
+        self.head: Node = self.tail
+        self.tail: Node = temp
+        after: Node = temp.next
         before = None
         for _ in range(self.length):
-            after = temp.next
-            temp.next = before
-            before = temp
-            temp = after
+            after: Node = temp.next
+            temp.next: Node = before
+            before: Node = temp
+            temp: Node = after
+        return True
